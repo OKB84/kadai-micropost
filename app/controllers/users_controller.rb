@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
-  before_action :set_user, only: [:show, :followings, :followers]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes]
+  before_action :set_user, only: [:show, :followings, :followers, :likes]
   
   def index
     @users = User.all.page(params[:page])
@@ -33,6 +33,11 @@ class UsersController < ApplicationController
   
   def followers
     @followers = @user.followers.page(params[:page])
+    counts(@user)
+  end
+  
+  def likes
+    @microposts = @user.favorite_microposts.page(params[:page])
     counts(@user)
   end
   

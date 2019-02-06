@@ -14,6 +14,8 @@
         <div>
           <% if current_user == micropost.user %>
             <%= link_to '削除', micropost, data: { confirm: '削除してよろしいですか？' }, class: 'btn btn-danger btn-xs' %>
+          <% else %>
+            <%= render 'favorites/like_button', micropost: micropost %>
           <% end %>
         </div>
       </div>
